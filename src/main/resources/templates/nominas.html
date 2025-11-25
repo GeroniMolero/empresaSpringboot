@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nóminas de Empleados</title>
+    <link th:href="@{/styles/global.css}" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <h1>Nóminas de Empleados</h1>
+</header>
+
+<main>
+    <section class="tabla-container">
+
+        <!-- Si no hay nóminas -->
+        <p class="mensaje" th:if="${#lists.isEmpty(listaNominas)}">
+            No se encontraron nóminas.
+        </p>
+
+        <!-- Si hay nóminas -->
+        <table class="tabla" th:if="${not #lists.isEmpty(listaNominas)}">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>DNI</th>
+                    <th>Categoría</th>
+                    <th>Años trabajados</th>
+                    <th>Salario</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="n : ${listaNominas}">
+                    <td th:text="${n.empleado.nombre}"></td>
+                    <td th:text="${n.empleado.dni}"></td>
+                    <td th:text="${n.empleado.categoria}"></td>
+                    <td th:text="${n.empleado.anyos}"></td>
+                    <td th:text="${#numbers.formatDecimal(n.salario, 2, 'COMMA', '.', '€')}"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="acciones">
+            <a th:href="@{/}" class="btn-secundario">Volver al inicio</a>
+        </div>
+
+    </section>
+</main>
+
+<footer>
+    <p>© 2025 Gestión de Nóminas</p>
+</footer>
+
+</body>
+</html>

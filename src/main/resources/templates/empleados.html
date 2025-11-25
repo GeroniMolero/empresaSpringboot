@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Empleados</title>
+    <link th:href="@{/styles/global.css}" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <h1>Listado de Empleados</h1>
+</header>
+
+<main>
+    <section class="tabla-container">
+
+        <!-- Si no hay empleados -->
+        <p class="mensaje" th:if="${#lists.isEmpty(listaEmpleados)}">
+            No hay empleados registrados.
+        </p>
+
+        <!-- Si hay empleados -->
+        <table class="tabla" th:if="${not #lists.isEmpty(listaEmpleados)}">
+            <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>DNI</th>
+                <th>Sexo</th>
+                <th>Categoría</th>
+                <th>Años trabajados</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="empleado : ${listaEmpleados}">
+                <td th:text="${empleado.nombre}"></td>
+                <td th:text="${empleado.dni}"></td>
+                <td th:text="${empleado.sexo}"></td>
+                <td th:text="${empleado.categoria}"></td>
+                <td th:text="${empleado.anyos}"></td>
+
+                <td>
+
+                    <!-- Editar empleado -->
+                    <a th:href="@{/empleados/editar/{dni}(dni=${empleado.dni})}"
+                       class="btn-small">Editar</a>
+
+                    <!-- Ver salario -->
+                    <a th:href="@{/nominas/consultarSalario/{dni}(dni=${empleado.dni})}"
+                       class="btn-small">Ver salario</a>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="acciones">
+            <a th:href="@{/}" class="btn-secundario">Volver al inicio</a>
+        </div>
+
+    </section>
+</main>
+
+<footer>
+    <p>© 2025 Gestión de Nóminas</p>
+</footer>
+
+</body>
+</html>

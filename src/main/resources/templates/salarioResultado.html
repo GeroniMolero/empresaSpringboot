@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultado del Salario</title>
+    <link th:href="@{/styles/global.css}" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <h1>Resultado del Cálculo de Salario</h1>
+</header>
+
+<main>
+    <section class="resultado-container"
+             style="width: 80%;
+                    max-width: 700px;
+                    margin: 40px auto;
+                    background-color: #2c2c2c;
+                    padding: 25px;
+                    border-radius: 10px;
+                    box-shadow: 0 0 10px #00000055;">
+
+        <!-- Mostrar error -->
+        <div class="error" th:if="${error}" th:text="${error}"></div>
+
+        <!-- Mostrar salario calculado -->
+        <div th:if="${empleado}">
+            <h2>Empleado: <span th:text="${empleado.nombre}"></span></h2>
+            <p><strong>DNI:</strong> <span th:text="${empleado.dni}"></span></p>
+            <p><strong>Categoría:</strong> <span th:text="${empleado.categoria}"></span></p>
+            <p><strong>Años trabajados:</strong> <span th:text="${empleado.anyos}"></span></p>
+            <p><strong>Salario calculado:</strong>
+                <span style="color:#5cff8a; font-size:1.3em;" th:text="${salario} + ' €'"></span>
+            </p>
+        </div>
+
+        <div class="acciones">
+            <a th:href="@{/}" class="btn-secundario">Volver al inicio</a>
+            <a th:href="@{/empleados}" class="btn-secundario">Ver empleados</a>
+        </div>
+
+    </section>
+</main>
+
+<footer>
+    <p>© 2025 Gestión de Nóminas</p>
+</footer>
+
+</body>
+</html>

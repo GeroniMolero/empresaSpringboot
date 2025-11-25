@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Nóminas - Inicio</title>
+
+    <!-- CSS en /static/styles/global.css -->
+    <link th:href="@{/styles/global.css}" rel="stylesheet">
+</head>
+<body>
+<header>
+    <h1>Gestión de Nóminas</h1>
+    <p>Aplicación Web de gestión de empleados y nóminas</p>
+</header>
+
+<main>
+    <section class="menu-container">
+        <div class="menu-card">
+            <h2>Opciones principales</h2>
+
+            <nav class="menu-links">
+
+                <!-- Ver empleados -->
+                <a th:href="@{/empleados}" class="btn-menu">Ver todos los empleados</a>
+
+                <!-- Consultar salario (ajusta si cambia tu controlador de nóminas) -->
+                <a th:href="@{/nominas/formularioSalario}" class="btn-menu">Consultar salario</a>
+
+                <!-- Modificar empleado / buscar -->
+                <a th:href="@{/empleados/buscar}" class="btn-menu">Modificar empleado</a>
+
+            </nav>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>© 2025 Gestión de Nóminas — Aplicación Web desarrollada por Gerónimo Molero Rodríguez |
+        Spring Boot • MVC • MySQL</p>
+</footer>
+</body>
+</html>

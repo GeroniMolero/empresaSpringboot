@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultado de Búsqueda</title>
+    <link th:href="@{/styles/global.css}" rel="stylesheet">
+</head>
+<body>
+<header>
+    <h1>Resultado de Búsqueda de Empleados</h1>
+</header>
+
+<main>
+    <section class="tabla-container">
+
+        <!-- Si no hay resultados -->
+        <p class="mensaje" th:if="${#lists.isEmpty(listaEmpleados)}">
+            No se encontraron empleados con los criterios de búsqueda.
+        </p>
+
+        <!-- Si hay resultados -->
+        <table class="tabla" th:if="${!#lists.isEmpty(listaEmpleados)}">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>DNI</th>
+                    <th>Sexo</th>
+                    <th>Categoría</th>
+                    <th>Años trabajados</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="empleado : ${listaEmpleados}">
+                    <td th:text="${empleado.nombre}"></td>
+                    <td th:text="${empleado.dni}"></td>
+                    <td th:text="${empleado.sexo}"></td>
+                    <td th:text="${empleado.categoria}"></td>
+                    <td th:text="${empleado.anyos}"></td>
+                    <td>
+                        <form th:action="@{/empleados/editar}" method="post" style="display:inline;">
+                            <input type="hidden" name="dni" th:value="${empleado.dni}">
+                            <button type="submit" class="btn-small">Editar</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="acciones">
+            <a th:href="@{/empleados/buscar}" class="btn-secundario">Nueva búsqueda</a>
+            <a th:href="@{/empleados}" class="btn-secundario">Volver al listado</a>
+        </div>
+
+    </section>
+</main>
+
+<footer>
+    <p>© 2025 Gestión de Nóminas</p>
+</footer>
+</body>
+</html>
