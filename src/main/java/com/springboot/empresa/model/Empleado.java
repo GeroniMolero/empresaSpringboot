@@ -11,6 +11,7 @@ public class Empleado extends Persona {
     private String dni;
 
     private int categoria;
+
     private int anyos;
 
     public Empleado() {}
