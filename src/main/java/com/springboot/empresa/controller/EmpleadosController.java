@@ -1,7 +1,7 @@
 package com.springboot.empresa.controller;
 
-import com.model.Empleado;
-import com.service.IEmpleadoService;
+import com.springboot.empresa.model.Empleado;
+import com.springboot.empresa.service.IEmpleadoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,28 +16,32 @@ public class EmpleadosController {
 
     private final IEmpleadoService empleadoService;
 
+    // ========================= LISTAR =========================
     @GetMapping
     public String listarEmpleados(Model model) {
         List<Empleado> lista = empleadoService.listarEmpleados();
         model.addAttribute("listaEmpleados", lista);
-        return "empleados";  // plantilla Thymeleaf empleados.html
+        return "empleados";  // empleados.html
     }
 
+    // ========================= BUSCAR =========================
     @GetMapping("/buscar")
     public String mostrarFormularioBusqueda() {
         return "buscarEmpleado"; // buscarEmpleado.html
     }
 
     @PostMapping("/buscar")
-    public String buscarResultado(
-            @RequestParam String criterio,
-            Model model
-    ) {
-        model.addAttribute("listaEmpleados",
-                empleadoService.buscarEmpleadosPorCriterio(criterio));
+    public String buscarResultado(@RequestParam String criterio, Model model) {
+
+        List<Empleado> resultado = empleadoService.buscarEmpleadosPorCriterio(criterio);
+
+        model.addAttribute("listaEmpleados", resultado);
+        model.addAttribute("criterio", criterio);
+
         return "resultadoBusqueda"; // resultadoBusqueda.html
     }
 
+    // ========================= EDITAR EMPLEADO =========================
     @GetMapping("/editar/{dni}")
     public String editarEmpleado(@PathVariable String dni, Model model) {
 
@@ -45,16 +49,24 @@ public class EmpleadosController {
 
         if (emp == null) {
             model.addAttribute("error", "No se encontró el empleado con DNI: " + dni);
-        } else {
-            model.addAttribute("empleado", emp);
+            return "error"; // error.html
         }
-        return "editarEmpleado";  // editarEmpleado.html
+
+        model.addAttribute("empleado", emp);
+        return "editarEmpleado"; // editarEmpleado.html
     }
 
+    // ========================= ACTUALIZAR EMPLEADO =========================
     @PostMapping("/actualizar")
-    public String actualizarEmpleado(@ModelAttribute Empleado empleado) {
+    public String actualizarEmpleado(@ModelAttribute Empleado empleado, Model model) {
 
-        empleadoService.actualizarEmpleado(empleado);
+        try {
+            empleadoService.actualizarEmpleado(empleado);
+        } catch (Exception e) {
+            model.addAttribute("error", "No se pudo actualizar el empleado: " + e.getMessage());
+            model.addAttribute("empleado", empleado);
+            return "editarEmpleado";
+        }
 
         return "redirect:/empleados";
     }
