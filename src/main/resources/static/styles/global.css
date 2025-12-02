@@ -332,6 +332,7 @@ tr:hover {
   text-align: center;
   border-bottom: 1px solid #444;
   color: #ddd;
+  vertical-align: middle;
 }
 
 .tabla th {
@@ -354,6 +355,10 @@ tr:hover {
   text-decoration: none;
   transition: background 0.3s ease;
   margin: 0 3px;
+}
+
+.tabla td:last-child {
+  white-space: nowrap;
 }
 
 .btn-small:hover {
