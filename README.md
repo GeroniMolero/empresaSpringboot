@@ -62,34 +62,17 @@ El código está organizado siguiendo las buenas prácticas de Spring Boot, sepa
  
  
  
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
 empresaSpringboot/
 └── src/
     └── main/
         ├── java/
         │   └── com/springboot/empresa/
         │       ├── config/          # Clases de configuración (OpenAPI, DataLoader)
-        │       ├── controller/      # Controladores MVC y REST
+        │       ├── controller/      # Manejan las peticiones HTTP (Web y REST)
         │       ├── dto/             # Data Transfer Objects para la API
-        │       ├── exception/       # Manejo global de excepciones
+        │       ├── exception/       # Manejo de excepciones
         │       ├── model/           # Entidades de la base de datos (JPA)
-        │       ├── repository/      # Interfaces de Spring Data JPA
+        │       ├── repository/      # Interfaces de acceso a datos (Spring Data JPA)
         │       ├── service/         # Lógica de negocio
         │       └── EmpresaApplication.java # Clase principal de la aplicación
         └── resources/
