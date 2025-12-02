@@ -30,16 +30,24 @@ public class EmpleadosController {
         return "buscarEmpleado"; // buscarEmpleado.html
     }
 
-    @PostMapping("/buscar")
-    public String buscarResultado(@RequestParam String criterio, Model model) {
+    // ... resto de la clase
 
-        List<Empleado> resultado = empleadoService.buscarEmpleadosPorCriterio(criterio);
+    @PostMapping("/buscar")
+    public String buscarResultado(
+            @RequestParam String campo, 
+            @RequestParam String valor, 
+            Model model) {
+
+        // Llamamos a un nuevo método en el servicio que manejará la búsqueda específica
+        List<Empleado> resultado = empleadoService.buscarEmpleadoPorCampoYValor(campo, valor);
 
         model.addAttribute("listaEmpleados", resultado);
-        model.addAttribute("criterio", criterio);
+        model.addAttribute("criterio", "Búsqueda por " + campo + ": " + valor); // Mensaje más descriptivo
 
-        return "resultadoBusqueda"; // resultadoBusqueda.html
+        return "resultadoBusqueda";
     }
+
+    // ... resto de la clase
 
     // ========================= EDITAR EMPLEADO =========================
     @GetMapping("/editar/{dni}")

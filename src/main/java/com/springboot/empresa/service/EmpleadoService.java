@@ -4,6 +4,7 @@ import com.springboot.empresa.model.Empleado;
 import com.springboot.empresa.repository.IEmpleadoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,7 +13,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class EmpleadoService implements IEmpleadoService {
 
-    private final IEmpleadoRepository repo;
+    private final IEmpleadoRepository repo; // Inyectamos la interfaz del repositorio
+    private final INominaService nominaService;
 
     @Override
     public List<Empleado> listarEmpleados() {
@@ -38,7 +40,44 @@ public class EmpleadoService implements IEmpleadoService {
     }
 
     @Override
+    @Transactional
     public void actualizarEmpleado(Empleado empleado) {
         repo.save(empleado);
+        nominaService.calcularYGuardarNomina(empleado);
+    }
+
+    @Override
+    @Transactional
+    public void guardarEmpleado(Empleado empleado) {
+        repo.save(empleado);
+    }
+
+    // --- MÉTODO CORREGIDO Y MOVEDO DENTRO DE LA CLASE ---
+    @Override
+    public List<Empleado> buscarEmpleadoPorCampoYValor(String campo, String valor) {
+        switch (campo.toLowerCase()) {
+            case "dni":
+                return repo.findByDni(valor).map(List::of).orElse(List.of());
+            case "nombre":
+                return repo.findByNombreContainingIgnoreCase(valor);
+            case "sexo":
+                return repo.findBySexo(valor);
+            case "categoria":
+                try {
+                    int categoria = Integer.parseInt(valor);
+                    return repo.findByCategoria(categoria);
+                } catch (NumberFormatException e) {
+                    return List.of();
+                }
+            case "anyos":
+                try {
+                    int anyos = Integer.parseInt(valor);
+                    return repo.findByAnyos(anyos);
+                } catch (NumberFormatException e) {
+                    return List.of();
+                }
+            default:
+                return List.of();
+        }
     }
 }
