@@ -79,7 +79,7 @@ empresaSpringboot/
             ├── static/          # Recursos estáticos (CSS, JS, imágenes)
             ├── templates/       # Plantillas Thymeleaf para las vistas web
             └── application.properties # Archivo de configuración principal
- ``
+ ```
  
  
 Funcionalidades Implementadas 
