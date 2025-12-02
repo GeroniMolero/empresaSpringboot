@@ -61,7 +61,7 @@ Estructura del Proyecto
 El código está organizado siguiendo las buenas prácticas de Spring Boot, separando las responsabilidades en paquetes: 
  
  
- 
+``` 
 empresaSpringboot/
 └── src/
     └── main/
@@ -79,7 +79,7 @@ empresaSpringboot/
             ├── static/          # Recursos estáticos (CSS, JS, imágenes)
             ├── templates/       # Plantillas Thymeleaf para las vistas web
             └── application.properties # Archivo de configuración principal
- 
+ ``
  
  
 Funcionalidades Implementadas 
