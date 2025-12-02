@@ -43,7 +43,6 @@ public class NominaService implements INominaService {
         return nominaRepository.findAll();
     }
 
-    // =================== IMPLEMENTACIÓN DEL NUEVO MÉTODO ===================
     @Override
     @Transactional
     public void calcularYGuardarNomina(Empleado empleado) {
@@ -53,5 +52,11 @@ public class NominaService implements INominaService {
         // 2. Usar el método existente actualizarSueldo para guardarlo.
         //    Este método ya se encarga de crear la nómina si no existe.
         this.actualizarSueldo(empleado.getDni(), sueldoCalculado);
+    }
+
+    @Override
+    @Transactional
+    public void borrarNominaPorDni(String dni) {
+        nominaRepository.deleteById(dni);
     }
 }

@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/nominas")
+@RequestMapping("api/nominas")
 public class NominasController {
 
     @Autowired

@@ -14,14 +14,12 @@ public interface IEmpleadoService {
 
     void actualizarEmpleado(Empleado empleado);
 
-    // =================== MÉTODO AÑADIDO ===================
     /**
      * Guarda un nuevo empleado en la base de datos.
      * @param empleado El objeto Empleado a guardar.
      */
     void guardarEmpleado(Empleado empleado);
 
-    // ... resto de la interfaz
 
     /**
      * Busca empleados por un campo y un valor específicos.
@@ -31,5 +29,6 @@ public interface IEmpleadoService {
      */
     List<Empleado> buscarEmpleadoPorCampoYValor(String campo, String valor);
 
-    // ... resto de la interfaz
+    
+    void borrarEmpleadoPorDni(String dni);
 }

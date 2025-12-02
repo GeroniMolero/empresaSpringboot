@@ -38,10 +38,7 @@
                     <td th:text="${empleado.categoria}"></td>
                     <td th:text="${empleado.anyos}"></td>
                     <td>
-                        <form th:action="@{/empleados/editar}" method="post" style="display:inline;">
-                            <input type="hidden" name="dni" th:value="${empleado.dni}">
-                            <button type="submit" class="btn-small">Editar</button>
-                        </form>
+                        <a th:href="@{/empleados/editar/{dni}(dni=${empleado.dni})}" class="btn-small">Editar</a>
                     </td>
                 </tr>
             </tbody>

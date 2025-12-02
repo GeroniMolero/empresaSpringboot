@@ -26,11 +26,12 @@ public interface INominaService {
      */
     List<Nomina> listarNominas();
 
-    // =================== MÉTODO AÑADIDO ===================
     /**
      * Calcula el sueldo para un empleado y guarda su nómina en la base de datos.
      * Si la nómina ya existe, la actualiza con el nuevo cálculo.
      * @param empleado El empleado del cual se calculará y guardará la nómina.
      */
     void calcularYGuardarNomina(Empleado empleado);
+
+    void borrarNominaPorDni(String dni);
 }

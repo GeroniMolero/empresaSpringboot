@@ -13,7 +13,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class EmpleadoService implements IEmpleadoService {
 
-    private final IEmpleadoRepository repo; // Inyectamos la interfaz del repositorio
+    private final IEmpleadoRepository repo;
     private final INominaService nominaService;
 
     @Override
@@ -52,7 +52,6 @@ public class EmpleadoService implements IEmpleadoService {
         repo.save(empleado);
     }
 
-    // --- MÉTODO CORREGIDO Y MOVEDO DENTRO DE LA CLASE ---
     @Override
     public List<Empleado> buscarEmpleadoPorCampoYValor(String campo, String valor) {
         switch (campo.toLowerCase()) {
@@ -79,5 +78,14 @@ public class EmpleadoService implements IEmpleadoService {
             default:
                 return List.of();
         }
+    }
+
+    @Override
+    @Transactional
+    public void borrarEmpleadoPorDni(String dni) {
+        // Primero borramos la nómina asociada para evitar problemas de clave foránea
+        nominaService.borrarNominaPorDni(dni); // Necesitarás añadir este método a INominaService
+        // Luego borramos al empleado
+        repo.deleteByDni(dni);
     }
 }

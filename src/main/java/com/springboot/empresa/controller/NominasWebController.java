@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
-@RequestMapping("/nominas") // Usamos la misma URL base, pero para vistas web
+@RequestMapping("/nominas")
 @RequiredArgsConstructor
 public class NominasWebController {
 
     private final INominaService nominaService;
-    private final IEmpleadoService empleadoService; // Necesitamos buscar el empleado para mostrar su nombre
+    private final IEmpleadoService empleadoService;
 
     // ========================= FORMULARIO PARA CONSULTAR SALARIO =========================
     // Muestra salarioForm.html

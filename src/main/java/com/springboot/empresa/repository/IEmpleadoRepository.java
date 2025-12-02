@@ -13,9 +13,9 @@ public interface IEmpleadoRepository extends JpaRepository<Empleado, String> {
     // Método para buscar por DNI
     Optional<Empleado> findByDni(String dni);
 
-    // --- MÉTODOS AÑADIDOS QUE NECESITA EL SERVICIO ---
     List<Empleado> findByNombreContainingIgnoreCase(String nombre);
     List<Empleado> findBySexo(String sexo);
     List<Empleado> findByCategoria(int categoria);
     List<Empleado> findByAnyos(int anyos);
+    void deleteByDni(String dni);
 }

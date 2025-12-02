@@ -47,8 +47,6 @@ public class EmpleadosController {
         return "resultadoBusqueda";
     }
 
-    // ... resto de la clase
-
     // ========================= EDITAR EMPLEADO =========================
     @GetMapping("/editar/{dni}")
     public String editarEmpleado(@PathVariable String dni, Model model) {
